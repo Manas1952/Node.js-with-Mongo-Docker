@@ -26,7 +26,7 @@ app.get('/profile-picture', (req, res) => {
 })
 
 const MONGO_URL_LOCAL = "mongodb://admin:password@localhost:27017"
-const MONGO_URL_DOCKER = "mongodb://admin:password@mongodb"
+const MONGO_URL_DOCKER = "mongodb://mongo:27017"
 
 app.post('/update-profile', async (req, res) => {
     const userObj = req.body
@@ -34,7 +34,7 @@ app.post('/update-profile', async (req, res) => {
     console.log('handled /update-profile');
 
     try {
-        const mongoClient = new MongoClient(MONGO_URL_LOCAL)
+        const mongoClient = new MongoClient(MONGO_URL_DOCKER)
         await mongoClient.connect()
         console.log('update-profile connected mongo');
 
@@ -51,7 +51,7 @@ app.post('/update-profile', async (req, res) => {
 
 app.get('/get-profile', async function (req, res) {
     try {
-        const mongoClient = new MongoClient(MONGO_URL_LOCAL)
+        const mongoClient = new MongoClient(MONGO_URL_DOCKER)
         await mongoClient.connect()
         console.log('connected');
 
